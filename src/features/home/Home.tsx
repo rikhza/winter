@@ -21,10 +21,17 @@ const MASTER_KEY =
 	import.meta.env.VITE_X_MASTER_KEY ??
 	import.meta.env.PUBLIC_X_MASTER_KEY ??
 	"";
+interface FloatingElement {
+	left: string;
+	top: string;
+	duration: number;
+	delay: number;
+	type: number;
+}
 
 const Home = () => {
 	const [showContent, setShowContent] = useState(false);
-	const [showLoveMessage, setShowLoveMessage] = useState(false);
+	// const [showLoveMessage, setShowLoveMessage] = useState(false); // Commented out as unused per linting
 	const [isLoading, setIsLoading] = useState(false);
 	const [timeTogether, setTimeTogether] = useState({
 		years: 0,
@@ -41,6 +48,19 @@ const Home = () => {
 	const [lastClickTime, setLastClickTime] = useState(0);
 	const [showLoveCounter, setShowLoveCounter] = useState(false);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+
+	const [floatingElements] = useState<FloatingElement[]>(() => {
+		// Use a stable random seed generation that satisfies the linter if possible,
+		// or just use Math.random since it's only called once in initialization.
+		// If the linter still complains, we'd need to move this to a global constant or useEffect with rAF.
+		return [...Array(30)].map((_, i) => ({
+			left: `${Math.random() * 100}%`,
+			top: `${Math.random() * 100}%`,
+			duration: 15 + Math.random() * 10,
+			delay: Math.random() * 5,
+			type: i % 4,
+		}));
+	});
 
 	// Fetch love counts from JSONBin.io
 	const fetchLoveCounts = () => {
@@ -270,7 +290,7 @@ const Home = () => {
 		}, 5000);
 
 		return () => clearInterval(messageTimer);
-	}, []);
+	}, [loveMessages.length]);
 
 	const handleLoveClick = (type: "kino" | "winter") => {
 		const now = Date.now();
@@ -278,7 +298,7 @@ const Home = () => {
 
 		setIsLoading(true);
 		setLastClickTime(now);
-		setShowLoveMessage(true);
+		// setShowLoveMessage(true);
 		setShowLoveCounter(true);
 
 		// First fetch the current counts
@@ -293,7 +313,7 @@ const Home = () => {
 		updateLoveCounts(newCounts);
 
 		setTimeout(() => {
-			setShowLoveMessage(false);
+			// setShowLoveMessage(false);
 			setShowLoveCounter(false);
 		}, 3000);
 	};
@@ -302,13 +322,13 @@ const Home = () => {
 		<div className="home">
 			{/* Floating Elements Background */}
 			<div className="floating-elements">
-				{[...Array(30)].map((_, i) => (
+				{floatingElements.map((el, i) => (
 					<motion.div
 						key={i}
 						className="floating-element"
 						style={{
-							left: `${Math.random() * 100}%`,
-							top: `${Math.random() * 100}%`,
+							left: el.left,
+							top: el.top,
 						}}
 						animate={{
 							y: [-20, 20, -20],
@@ -316,17 +336,17 @@ const Home = () => {
 							scale: [0.8, 1, 0.8],
 						}}
 						transition={{
-							duration: 15 + Math.random() * 10,
+							duration: el.duration,
 							repeat: Infinity,
-							delay: Math.random() * 5,
+							delay: el.delay,
 							ease: "easeInOut",
 						}}
 					>
-						{i % 4 === 0 ? (
+						{el.type === 0 ? (
 							<Heart className="text-pink-300" size={20} />
-						) : i % 4 === 1 ? (
+						) : el.type === 1 ? (
 							<Flower className="text-pink-200" size={20} />
-						) : i % 4 === 2 ? (
+						) : el.type === 2 ? (
 							<Star className="text-pink-100" size={20} />
 						) : (
 							<Diamond className="text-pink-200" size={20} />
@@ -389,7 +409,9 @@ const Home = () => {
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.4 + index * 0.1 }}
 									style={
-										{ "--unit-color": unit.color } as any
+										{
+											"--unit-color": unit.color,
+										} as React.CSSProperties
 									}
 								>
 									<Icon className="time-unit-icon" />

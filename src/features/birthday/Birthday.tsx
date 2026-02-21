@@ -3,6 +3,13 @@ import { Heart, Music, Flower, Flame, Gift } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import YouTube from "react-youtube";
 import "./Birthday.css";
+interface FloatingHeart {
+	left: string;
+	top: string;
+	opacity: number;
+	duration: number;
+	delay: number;
+}
 
 const Birthday = () => {
 	const [showContent, setShowContent] = useState(false);
@@ -16,7 +23,18 @@ const Birthday = () => {
 	const [micPermission, setMicPermission] = useState(false);
 	const [blowStrength, setBlowStrength] = useState(0);
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const playerRef = useRef<any>(null);
+
+	const [floatingHearts] = useState<FloatingHeart[]>(() => {
+		return [...Array(20)].map(() => ({
+			left: `${Math.random() * 100}%`,
+			top: `${Math.random() * 100}%`,
+			opacity: 0.2 + Math.random() * 0.3,
+			duration: 15 + Math.random() * 10,
+			delay: Math.random() * 5,
+		}));
+	});
 
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -60,6 +78,7 @@ const Birthday = () => {
 	};
 
 	// Handle when the YouTube player is ready
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onReady = (event: any) => {
 		playerRef.current = event.target;
 		playerRef.current.playVideo(); // Start playing the video
@@ -241,19 +260,6 @@ const Birthday = () => {
 											Happy Birthday!
 										</motion.h1>
 
-										<motion.p
-											className="text-lg text-gray-700 mb-4"
-											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{
-												delay: 0.3,
-												duration: 0.5,
-											}}
-										>
-											ini bukan kata2 AI kok, jadi kamu
-											baca yaa HAHAHA
-										</motion.p>
-
 										<motion.div
 											className="text-left space-y-4"
 											initial={{ opacity: 0 }}
@@ -271,19 +277,12 @@ const Birthday = () => {
 											</p>
 											<p className="text-gray-800">
 												aku bener-bener bersyukur bisa
-												ketemu sama kamu. kamu udah jadi
-												part of me. tiap hari aku makin
-												sayang.
-											</p>
-											<p className="text-gray-800">
-												aku bakal selalu ada buat kamu,
-												aku bakal terus perjuangin.
+												diketemuin sama kamu.
 											</p>
 											<p className="text-gray-800">
 												di ulang tahun kamu yang spesial
-												ini, semoga semua impian dan
-												harapan kamu bisa terwujud ya
-												sayang, apapun wish kamu 🌟
+												ini, semoga semua impian bisa
+												terwujud ya, apapun wish kamu 🌟
 											</p>
 											<p className="text-gray-800">
 												I love you to the moon and back!
@@ -551,14 +550,14 @@ const Birthday = () => {
 
 				{/* Floating hearts background */}
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					{[...Array(20)].map((_, i) => (
+					{floatingHearts.map((heart, i) => (
 						<motion.div
 							key={i}
 							className="absolute"
 							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-								opacity: 0.2 + Math.random() * 0.3,
+								left: heart.left,
+								top: heart.top,
+								opacity: heart.opacity,
 							}}
 							animate={{
 								y: [-20, 20, -20],
@@ -566,9 +565,9 @@ const Birthday = () => {
 								scale: [0.8, 1, 0.8],
 							}}
 							transition={{
-								duration: 15 + Math.random() * 10,
+								duration: heart.duration,
 								repeat: Infinity,
-								delay: Math.random() * 5,
+								delay: heart.delay,
 								ease: "easeInOut",
 							}}
 						>

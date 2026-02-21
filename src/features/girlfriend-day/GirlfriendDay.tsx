@@ -6,7 +6,7 @@ import {
 	Sparkles,
 	HeartHandshake,
 	Crown,
-	Infinity,
+	Infinity as InfinityIcon,
 	Target,
 	ArrowRight,
 	ArrowLeft,
@@ -155,7 +155,7 @@ const GirlfriendDay = () => {
 			subtitle: "My Heart Belongs to You",
 			message:
 				"I love you more than words can express. You are my everything, my present, and my future.",
-			icon: Infinity,
+			icon: InfinityIcon,
 			color: "#db2777",
 		},
 		{

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Heart, Gift, Lock, Crown } from "lucide-react";
 import Home from "./features/home/Home";
@@ -67,34 +67,37 @@ function App() {
 		};
 	}, []);
 
-	const handlePinInput = (digit: string) => {
-		if (pin.length < 6 && !showError) {
-			const newPin = pin + digit;
-			setPin(newPin);
+	const handlePinInput = useCallback(
+		(digit: string) => {
+			if (pin.length < 6 && !showError) {
+				const newPin = pin + digit;
+				setPin(newPin);
 
-			if (newPin.length === 6) {
-				if (newPin === "000000") {
-					setShowError(false);
-					setIsUnlocking(true);
-					setTimeout(() => {
-						setIsLocked(false);
-						setIsUnlocking(false);
-					}, 550);
-				} else {
-					setShowError(true);
-					setTimeout(() => {
-						setPin("");
+				if (newPin.length === 6) {
+					if (newPin === "000000") {
 						setShowError(false);
-					}, 1000);
+						setIsUnlocking(true);
+						setTimeout(() => {
+							setIsLocked(false);
+							setIsUnlocking(false);
+						}, 550);
+					} else {
+						setShowError(true);
+						setTimeout(() => {
+							setPin("");
+							setShowError(false);
+						}, 1000);
+					}
 				}
 			}
-		}
-	};
+		},
+		[pin, showError],
+	);
 
-	const handleDelete = () => {
+	const handleDelete = useCallback(() => {
 		if (showError || pin.length === 0) return;
 		setPin(pin.slice(0, -1));
-	};
+	}, [pin, showError]);
 
 	useEffect(() => {
 		if (!isLocked) return;
@@ -112,7 +115,7 @@ function App() {
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [isLocked, pin, showError]);
+	}, [isLocked, handlePinInput, handleDelete]);
 
 	if (isLocked) {
 		return (
