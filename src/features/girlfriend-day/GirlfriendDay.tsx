@@ -40,8 +40,8 @@ const GirlfriendDay = () => {
 	const bucketListGoals = [
 		{
 			id: 1,
-			title: "Winter ke Jepang",
-			description: "First step of her life",
+			title: "Debut Milestone: Winter in Japan",
+			description: "Langkah pertama bias menuju panggung dunia",
 			icon: "🗾",
 			category: "New Career",
 			color: "#3b82f6",
@@ -50,8 +50,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 2,
-			title: "Kino lulus wisuda",
-			description: "Merayakan kelulusan",
+			title: "Fan Goal: Kino's Graduation",
+			description: "Jadi fans sukses biar bisa dukung bias terus",
 			icon: "🎓",
 			category: "Education",
 			color: "#10b981",
@@ -60,8 +60,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 3,
-			title: "Winter fokus kerjaannya",
-			description: "Membangun karir",
+			title: "Solo Era: Winter's Peak Career",
+			description: "Bias fokus bersinar, fans tetap setia mendukung",
 			icon: "💼",
 			category: "Career",
 			color: "#f59e0b",
@@ -70,8 +70,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 4,
-			title: "Kino fokus kerjaannya juga",
-			description: "Membangun masa depan",
+			title: "Support System: Kino's Dedication",
+			description: "Bekerja keras demi masa depan bareng idola",
 			icon: "🚀",
 			category: "Career",
 			color: "#8b5cf6",
@@ -80,8 +80,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 5,
-			title: "Kino ke Aussie",
-			description: "Petualangan di Australia",
+			title: "Overseas Tour: Aussie Stage",
+			description: "Mengejar impian sampai ke benua kangguru",
 			icon: "🦘",
 			category: "Career",
 			color: "#ef4444",
@@ -90,8 +90,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 6,
-			title: "Winter ikut ke Aussie",
-			description: "Bersama-sama menjelajahi Australia",
+			title: "World Tour: Australian Journey",
+			description: "Menjelajahi dunia berdua bareng bias tersayang",
 			icon: "✈️",
 			category: "Travel",
 			color: "#06b6d4",
@@ -100,8 +100,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 7,
-			title: "Winter together",
-			description: "Selalu bersama dalam setiap langkah",
+			title: "Always On Top: Winter & Kino",
+			description: "Selalu bersama dalam setiap tour kehidupan",
 			icon: "💑",
 			category: "Love",
 			color: "#ec4899",
@@ -110,8 +110,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 8,
-			title: "Sama winter keliling dunia",
-			description: "Melihat keindahan dunia berdua",
+			title: "Global Stage: Around the World",
+			description: "Melihat keindahan dunia dari atas panggung berdua",
 			icon: "🌍",
 			category: "Travel",
 			color: "#84cc16",
@@ -120,8 +120,8 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 9,
-			title: "Sama winter nikah",
-			description: "Memulai babak baru kehidupan",
+			title: "Main Event: The Wedding Ceremony",
+			description: "Puncak dari perjalanan idola dan penggemar setia",
 			icon: "💒",
 			category: "Love",
 			color: "#f97316",
@@ -143,7 +143,7 @@ const GirlfriendDay = () => {
 	const steps = [
 		{
 			id: 0,
-			title: "My Dearest Winter",
+			title: "My Ultimate Bias: Winter",
 			subtitle: "August 1st - Girlfriend Day",
 			message: getTimeBasedMessage(),
 			icon: Crown,
@@ -151,7 +151,7 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 1,
-			title: "Endless Love",
+			title: "Dedicated Fandom",
 			subtitle: "My Heart Belongs to You",
 			message:
 				"I love you more than words can express. You are my everything, my present, and my future.",
@@ -160,7 +160,7 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 2,
-			title: "Beautiful Soul",
+			title: "Superstar Energy",
 			subtitle: "You Make Me Complete",
 			message:
 				"Your smile brightens my darkest days. Your love makes my heart dance with joy.",
@@ -169,7 +169,7 @@ const GirlfriendDay = () => {
 		},
 		{
 			id: 3,
-			title: "Forever Yours",
+			title: "Support System Activation",
 			subtitle: "Together Always",
 			message:
 				"I promise to love you endlessly, to be there for you always, and to cherish every moment we share.",
@@ -422,7 +422,7 @@ const GirlfriendDay = () => {
 						<Crown size={16} />
 						<span>Girlfriend Day Special</span>
 					</div>
-					<h1>For My Dearest Winter</h1>
+					<h1>To My Only Superstar, Winter</h1>
 					<p>
 						A little journey of words, promises, and dreams we will
 						make real together.
@@ -678,7 +678,7 @@ const GirlfriendDay = () => {
 								×
 							</button>
 							<Crown className="gd2-crown" />
-							<h2>Happy Girlfriend Day, Winter! 👑</h2>
+							<h2>Happy Ultimate Bias Day, Winter! 👑</h2>
 							<p>
 								Today is all about you, my love. You deserve all
 								the love in the world.
@@ -687,7 +687,7 @@ const GirlfriendDay = () => {
 								className="gd2-primary"
 								onClick={() => setShowWelcomeMessage(false)}
 							>
-								Start My Special Day
+								Start My Fansign Event
 							</button>
 						</motion.div>
 					</motion.div>
@@ -770,7 +770,9 @@ const GirlfriendDay = () => {
 								These flowers represent my endless love for you,
 								now and always.
 							</p>
-							<p className="gd2-sign">With love, Kino</p>
+							<p className="gd2-sign">
+								From your No. 1 Fan, Kino
+							</p>
 						</motion.div>
 					</motion.div>
 				)}
